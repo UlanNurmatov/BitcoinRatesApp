@@ -33,7 +33,8 @@ class ConverterViewController: UIViewController {
         ServerManager.shared.getcurrentPrice(currency: selectedCurrency.rawValue, header: [:], completion: successCurrentPrice, error: error, networkError: networkError)
     }
     
-    
+    //MARK: Button actions handlers
+
     @IBAction func currencySelected(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -48,6 +49,7 @@ class ConverterViewController: UIViewController {
         }
     }
     
+
     @IBAction func convertButtonTapped() {
         guard Double(textField.text!) != nil else { return }
         currencyControl.isEnabled = false
@@ -59,6 +61,8 @@ class ConverterViewController: UIViewController {
         switchIsOn = sender.isOn
     }
     
+    //MARK: Server response handlers
+
     func successCurrentPrice(price: BitcoinCurrentPrice) {
         
            var converted = Double()
@@ -111,6 +115,7 @@ class ConverterViewController: UIViewController {
         print(message)
     }
     
+    //Dismiss keyboard when view touched
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true);
     }

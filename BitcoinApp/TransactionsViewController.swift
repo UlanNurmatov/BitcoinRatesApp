@@ -69,11 +69,14 @@ class TransactionsViewController: UIViewController {
             tableView.addSubview(refresher)
         }
     }
-    
+    //MARK: Server requests
+
     func getTransactions() {
         ServerManager.shared.getTransactions(header: [:], completion: success, error: error, networkError: networkError)
     }
     
+    //MARK: Server response handlers
+
     func success(transaction: [Transaction]) {
         let first500 = transaction[0...499]
         self.data = Array(first500)
@@ -93,6 +96,8 @@ class TransactionsViewController: UIViewController {
     }
     
 }
+
+//MARK: TableView
 
 extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate {
     

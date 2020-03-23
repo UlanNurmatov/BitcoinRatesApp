@@ -28,6 +28,7 @@ class PricesViewController: UIViewController {
     @IBOutlet weak var priceHistoryControl: UISegmentedControl!
     @IBOutlet weak var flag: UIImageView!
 
+    //MARK: Properties
     
     var historicalData: BitcoinPriceViewModel?
     var priceData: BitcoinCurrentPrice?
@@ -64,6 +65,8 @@ class PricesViewController: UIViewController {
         activity.center = self.view.center
     }
     
+    //MARK: Action handlers
+
     @IBAction func currencySelected(_ sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
@@ -104,7 +107,8 @@ class PricesViewController: UIViewController {
         }
     }
 
-    
+    //MARK: Server requests
+
     func getCurrentPrice() {
         ServerManager.shared.getcurrentPrice(currency: selectedCurrency.rawValue, header: [:], completion: successCurrentPrice, error: error, networkError: networkError)
     }
@@ -117,6 +121,8 @@ class PricesViewController: UIViewController {
         ServerManager.shared.getBitcoinPrices(start: dates.first!, end: dates.last!, currency: selectedCurrency.rawValue, header: [:], completion: success, error: error, networkError: networkError)
     }
     
+    //MARK: Server response handlers
+
     func successCurrentPrice(price: BitcoinCurrentPrice) {
         switch selectedCurrency {
         case .USD:
@@ -148,6 +154,8 @@ class PricesViewController: UIViewController {
         print(message)
     }
 }
+
+//MARK: TableView
 
 extension PricesViewController: UITableViewDataSource, UITableViewDelegate {
         
